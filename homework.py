@@ -1,152 +1,88 @@
+import random
+name = input("Please enter your name:")
+print("Hello", name,",\nLet's play a game.\nThis is a password guessing game.")
+print("I will choose a random word among;")
+print("Passcode, Stove, Guest, Security, Win, Convo, Audio, State, Caine, Crack, Cipher, Astro, Wordle,")
+
+choises = True
+
+computer_choice = ["Passcode", "Stove", "Guest", "Security", "Win", "Convo", "Audio", "State", "Caine", "Crack", "Cipher", "Astro", "Wordle"]
+
+passcode = random.choice(computer_choice)
+
+guessing = 5
+
+while choises:
+    guess = input("\nGuess the code:")
+    
+    if guess == passcode:
+        print("Correct guess!")
+        break
+    else:
+        print("Nope! Incorrect.")
+    
+    guessing -= 1
+    if guessing == 0:
+        print("Took too long. The code was:", passcode)
+        break
+    
+    
+#https://trinket.io/pygame/d16db05e955d
+
+#https://trinket.io/pygame/c9691425bbcf
+
+#https://trinket.io/features/pygame
+
+#https://trinket.io/pygame/c140e8bbcb49
+
+#https://trinket.io/pygame/9a17a6e3f670
+
 from tkinter import *
-from tkinter import messagebox
 
 
 root = Tk()
-root.title("Denomination Counter")
-root.configure(bg="light blue")
-root.geometry("650x400")
+root.title('Login App')
+root.geometry('400x400')
 
-label = Label(root, bg="light blue")
-label.place(x=180, y=20)
+# Create a frame to organize elements better
+frame = Frame(master=root, height=200, width=360, bg="#d0efff")
 
-label1 = Label(
-    root,
-    text="Hey User! Welcome to Denomination Counter Application.",
-    bg="light blue"
-)
-label1.place(relx=0.5, y=340, anchor=CENTER)
+# Add widgets
+# Add Label 
+lbl1 = Label(frame, text = "Full Name", bg="#3895D3", fg='white', width=12)
+lbl2 = Label(frame, text = "Email Id", bg="#3895D3", fg='white', width=12)
+lbl3 = Label(frame, text = "Enter Password", bg="#3895D3", fg='white', width=12)
 
-def msg():
-    MsgBox = messagebox.showinfo(
-        "Alert",
-        "Do you want to calculate the denomination count?"
-    )
-    if MsgBox == "ok":
-        topwin()
+# Use Entry Widget to create a text box for user to enter details
+name_entry = Entry(frame)
+email_entry = Entry(frame)
+pass_entry = Entry(frame, show="*")
 
-button1 = Button(
-    root,
-    text="Let's get started!",
-    command=msg,
-    bg="brown",
-    fg="white"
-)
-button1.place(x=260, y=360)
+# Function to display message
+def display():
+	name = name_entry.get()
+	greet = "Hey "+name
+	message =  "\nCongratulations for your new account!"
+	textbox.insert(END, greet)
+	textbox.insert(END, message)
 
-def topwin():
-    top = Toplevel()
-    top.title("Denominations Calculator")
-    top.configure(bg="light grey")
-    top.geometry("600x350+50+50")
+# Textbox to display message
+textbox = Text(bg="#BEBEBE", fg="black")
 
-    label = Label(top, text="Enter total amount", bg="light grey")
-    entry = Entry(top)
+# Add Button, when pressed, message will be displayed
+btn = Button(text = "Create Account", command=display, bg="red")
 
-    lbl = Label(
-        top,
-        text="Here are number of notes for each denomination",
-        bg="light grey"
-    )
+# Arrange all widgets
+frame.place(x=20,y=0)
+lbl1.place(x=20, y=20)
+name_entry.place(x=150, y=20)
+lbl2.place(x=20, y=80)
+email_entry.place(x=150, y=80)
+lbl3.place(x=20, y=140)
+pass_entry.place(x=150, y=140)
+btn.place(x=130, y=210)
+textbox.place(y=250)
 
-    l1 = Label(top, text="5000", bg="light grey")
-    l2 = Label(top, text="1000", bg="light grey")
-    l3 = Label(top, text="500", bg="light grey")
-    l4 = Label(top, text="200", bg="light grey")
-    l5 = Label(top, text="100", bg="light grey")
-    l6 = Label(top, text="50", bg="light grey")
-    l7 = Label(top, text="20", bg="light grey")
-    l8 = Label(top, text="10", bg="light grey")
-    l9 = Label(top, text="5", bg="light grey")
-
-    t1 = Entry(top)
-    t2 = Entry(top)
-    t3 = Entry(top)
-    t4 = Entry(top)
-    t5 = Entry(top)
-    t6 = Entry(top)
-    t7 = Entry(top)
-    t8 = Entry(top)
-    t9 = Entry(top)
-
-
-    def calculator():
-        try:
-            amount = int(entry.get())
-
-            note5000 = amount // 5000
-            amount %= 5000
-
-            note1000 = amount // 1000
-            amount %= 1000
-            
-            note500 = amount // 500
-            amount %= 500
-            
-            note200 = amount // 200
-            amount %= 200
-            
-            note100 = amount // 100
-            amount %= 100
-            
-            note50 = amount // 50
-            amount %= 50
-            
-            note20 = amount // 20
-            amount %= 20
-            
-            note10 = amount // 10
-            amount %= 10
-            
-            note5 = amount // 5
-            amount %= 5
-            
-
-            t1.delete(0, END)
-            t2.delete(0, END)
-            t3.delete(0, END)
-            t4.delete(0, END)
-            t5.delete(0, END)
-            t6.delete(0, END)
-            t7.delete(0, END)
-            t8.delete(0, END)
-            t9.delete(0, END)
-
-            t1.insert(END, str(note5000))
-            t2.insert(END, str(note1000))
-            t3.insert(END, str(note500))
-            t4.insert(END, str(note200))
-            t5.insert(END, str(note100))
-            t6.insert(END, str(note50))
-            t7.insert(END, str(note20))
-            t8.insert(END, str(note10))
-            t9.insert(END, str(note5))
-
-        except ValueError:
-            messagebox.showerror("Error", "Please enter a valid number.")
-
-    btn = Button(
-        top,
-        text="Calculate",
-        command=calculator,
-        bg="brown",
-        fg="white"
-    )
-
-    label.place(x=230, y=50)
-    entry.place(x=200, y=80)
-    btn.place(x=240, y=120)
-
-    lbl.place(x=140, y=170)
-
-    l1.place(x=180, y=200)
-    l2.place(x=180, y=230)
-    l3.place(x=180, y=260)
-
-    t1.place(x=270, y=200)
-    t2.place(x=270, y=230)
-    t3.place(x=270, y=260)
-
-    top.mainloop()
-
+# Start the GUI event loop
 root.mainloop()
+
